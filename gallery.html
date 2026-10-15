@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gallery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="images/logo.jpeg" alt="Logo">
+      <span>Beautiful Places Around the World</span>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="tips.html">Travel Tips</a>
+      <a href="gallery.html" aria-current="page">Gallery</a>
+      <a href="about.html">About Me</a>
+    </nav>
+  </header>
+
+  <!-- Gallery Hero -->
+  <section class="hero hero-gallery">
+    <div class="hero-text">
+      <h1>Gallery</h1>
+      <p>A collection of my favourite moments from around the world</p>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="page-content">
+    <!-- Category Buttons -->
+    <div class="categories">
+      <button type="button" class="active" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="asia" aria-pressed="false">Asia</button>
+      <button type="button" data-filter="europe" aria-pressed="false">Europe</button>
+      <button type="button" data-filter="oceania" aria-pressed="false">Oceania</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery-grid">
+      <div class="gallery-item" data-category="asia">
+        <img src="images/japan3.jpeg" alt="Japan">
+        <p>Japan</p>
+      </div>
+      <div class="gallery-item" data-category="europe">
+        <img src="images/switzerland3.jpeg" alt="Switzerland">
+        <p>Switzerland</p>
+      </div>
+      <div class="gallery-item" data-category="europe">
+        <img src="images/italy3.jpeg" alt="Italy">
+        <p>Italy</p>
+      </div>
+      <div class="gallery-item" data-category="asia">
+        <img src="images/malaysia3.jpeg" alt="Malaysia">
+        <p>Malaysia</p>
+      </div>
+      <div class="gallery-item" data-category="oceania">
+        <img src="images/newzealand3.jpeg" alt="New Zealand">
+        <p>New Zealand</p>
+      </div>
+      <div class="gallery-item" data-category="asia">
+        <img src="images/malaysia4.jpeg" alt="Malaysia">
+        <p>Malaysia</p>
+      </div>
+      <div class="gallery-item" data-category="europe">
+        <img src="images/italy4.jpeg" alt="Italy">
+        <p>Italy</p>
+      </div>
+      <div class="gallery-item" data-category="asia">
+        <img src="images/maldives3.jpeg" alt="Maldives">
+        <p>Maldives</p>
+      </div>
+      <div class="gallery-item" data-category="europe">
+        <img src="images/norway3.jpeg" alt="Norway">
+        <p>Norway</p>
+      </div>
+      <div class="gallery-item" data-category="europe">
+        <img src="images/unitedkingdom3.jpeg" alt="United Kingdom">
+        <p>United Kingdom</p>
+      </div>
+      <div class="gallery-item" data-category="asia">
+        <img src="images/kazakhstan1.jpeg" alt="Kazakhstan">
+        <p>Kazakhstan</p>
+      </div>
+      <div class="gallery-item" data-category="asia">
+        <img src="images/maldives4.jpeg" alt="Maldives">
+        <p>maldives</p>
+      </div>
+    </div>
+    <p class="gallery-empty" role="status" aria-live="polite" hidden>No photos in this category yet.</p>
+
+    <section class="gallery-video" aria-labelledby="gallery-video-title">
+      <h2 id="gallery-video-title">Must-See Destinations</h2>
+      <div class="gallery-video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/ZdQ5-K5QG4c"
+          title="Most Beautiful Places in The World | Must See Destinations | 4K"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Final Project - Azyyati DDB0302. All rights reserved. For educational purposes only.</p>
+  </footer>
+  <script>
+    const categoryButtons = document.querySelectorAll(".categories button");
+    const galleryItems = document.querySelectorAll(".gallery-item");
+    const emptyState = document.querySelector(".gallery-empty");
+
+    categoryButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const selectedCategory = button.dataset.filter;
+        let visibleItems = 0;
+
+        galleryItems.forEach((item) => {
+          const isVisible = selectedCategory === "all" || item.dataset.category === selectedCategory;
+          item.hidden = !isVisible;
+          if (isVisible) visibleItems += 1;
+        });
+
+        categoryButtons.forEach((categoryButton) => {
+          const isActive = categoryButton === button;
+          categoryButton.classList.toggle("active", isActive);
+          categoryButton.setAttribute("aria-pressed", String(isActive));
+        });
+
+        emptyState.hidden = visibleItems > 0;
+      });
+    });
+  </script>
+</body>
+</html>
